@@ -299,6 +299,31 @@ This is a contradiction. Therefore, a is odd and b is odd
 
 ### Induction and Loop Invariants
 
-[Finsih this]
+#### Example
+Condider the Fib function F(n), which is defined such that
+$F(1) = 1$, $F(2) = 2$, $F(n) = F(n-2) + F(n-1)$, for $n>2$.
+
+#### Base cases: 
+$n\neq2: F(1) = 1 < 2 = 2^1 $ and $F(2) = 2 < 4 = 2^2$
+#### Induction step:
+Using inductive hypothesis: $n>2: F(n) < 2^{n-2} + 2^{n-1}$, since
+$$ 2^{n-2} + 2^{n-1} < 2^{n-1} + 2^{n-1} = 2 * 2^{n-1} = 2^n $$
 
 
+### Loop Invariants
+To prove some statement $\mathcal{L}$ about a loop is correct, define $\mathcal{L}$ in terms of a series of smaller statements $\mathcal{L}_0, \mathcal{L}_1, \dots, \mathcal{L}_k $ where:
+1. The initial claim, $\mathcal{L}_0$ is true before loop begins.
+2. if $\mathcal{L}_{j-1}$ is true before iteration j, then $\mathcal{L}_j$ will be true after iteration j.
+3. The final statement, $\mathcal{L}_k$, implies the desired statement $\mathcal{L}$ to be true.
+
+```py
+def find(S, val):
+    n = len(S)
+    j = 0
+    while j < n:
+        if S[j] == val:
+            return j
+        j += 1
+    return -1
+```
+$\mathcal{L}_j$: val is not equal to any of the first elements of S.
